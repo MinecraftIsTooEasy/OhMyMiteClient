@@ -17,55 +17,57 @@ import static com.github.debris.ommc.config.ConfigFactory.*;
 
 public class MainConfig extends SimpleConfigs {
     // boolean tweaks
-    public static final ConfigBoolean DisableScoreBoard = ofBoolean("禁止渲染计分板");
-    public static final ConfigBoolean AutoQuitGame = ofBoolean("低血量退出游戏");
-    public static final ConfigBoolean GammaOverride = ofBooleanWithDependency("强制夜视", "gamma_free", "这需要gamma_free模组");
-    public static final ConfigBoolean DevClient = ofBoolean("Dev客户端");
-    public static final ConfigBoolean FPSUnlocked = ofBoolean("帧数解禁");
-    public static final ConfigBoolean RotateFree = ofBoolean("转动自由", "当你有缓慢效果时仍然能自由转动视角");
-    public static final ConfigBoolean RemoveGuiContainerCD = ofBoolean("取消容器Gui冷却", "在离开村民交易和马的物品栏时不再有冷却");
-    public static final ConfigBoolean CreativeOneHit = ofBoolean("创造模式一击必杀");
+    public static final ConfigBoolean DisableScoreBoard = ofBoolean("ommc.disableScoreboard");
+    public static final ConfigBoolean AutoQuitGame = ofBoolean("ommc.autoQuitGame");
+    public static final ConfigBoolean GammaOverride = ofBooleanWithDependency("ommc.gammaOverride", "gamma_free", "config.comment.ommc.gammaOverride");
+    public static final ConfigBoolean DevClient = ofBoolean("ommc.devClient");
+    public static final ConfigBoolean FPSUnlocked = ofBoolean("ommc.fpsUnlocked");
+    public static final ConfigBoolean RotateFree = ofBoolean("ommc.rotateFree", "config.comment.ommc.rotateFree");
+    public static final ConfigBoolean RemoveGuiContainerCD = ofBoolean("ommc.removeGuiContainerCooldown", "config.comment.ommc.removeGuiContainerCooldown");
+    public static final ConfigBoolean CreativeOneHit = ofBoolean("ommc.creativeOneHit");
+    public static final ConfigBoolean PermanentSneakAllowInGUIs = ofBoolean("ommc.permanentSneakAllowInGuis", "config.comment.ommc.permanentSneakAllowInGuis");
 
 
     // numerical
-    public static final ConfigInteger PeriodicAttackInterval = ofInteger("ommc.periodicAttackInterval", 10, 1, 200, "单位为刻");
-    public static final ConfigInteger PeriodicUseInterval = ofInteger("ommc.periodicUseInterval", 10, 1, 200, "单位为刻");
-    public static final ConfigDouble FlySpeedLevel = ofDouble("FlySpeedLevel", 0.99d, 0.0d, 1.0d);
-    public static final ConfigDouble FlySpeedVertical = ofDouble("FlySpeedVertical", 0.99d, 0.0d, 1.0d);
-    public static final ConfigInteger OverrideUseInterval = ofInteger("OverrideUseInterval", 250, 1, 250, "单位毫秒");
-    public static final ConfigInteger TasksPerTick = ofInteger("每刻执行任务数", 5, 0, 20, "关于本模组的任务队列");
-    public static final ConfigDouble QuitGameThreshold = ofDouble("低血量退出游戏阈值", 2.0D, 0.0D, Double.MAX_VALUE, false, "受到伤害后低于此血量时, 触发退出游戏");
-    public static final ConfigInteger QuitGameSpeed = ofInteger("低血量退出速度", 4, 2, 100, "模拟按下Esc之后, 点击退出按钮之前的时间(单位刻), 单机游戏不能调太低, 因为可能导致存档损坏");
-    public static final ConfigInteger QuitGameCounter = ofInteger("低血量免退出倒计时", 60, 1, 100, "在这段时间(单位秒)过去之前, 你进入游戏时不会自动退出");
+    public static final ConfigInteger PeriodicAttackInterval = ofInteger("ommc.periodicAttackInterval", 10, 1, 200, "config.comment.ommc.periodicAttackInterval");
+    public static final ConfigInteger PeriodicUseInterval = ofInteger("ommc.periodicUseInterval", 10, 1, 200, "config.comment.ommc.periodicUseInterval");
+    public static final ConfigDouble FlySpeedLevel = ofDouble("ommc.flySpeedLevel", 0.99d, 0.0d, 1.0d);
+    public static final ConfigDouble FlySpeedVertical = ofDouble("ommc.flySpeedVertical", 0.99d, 0.0d, 1.0d);
+    public static final ConfigInteger OverrideUseInterval = ofInteger("ommc.overrideUseInterval", 250, 1, 250, "config.comment.ommc.overrideUseInterval");
+    public static final ConfigInteger TasksPerTick = ofInteger("ommc.tasksPerTick", 5, 0, 20, "config.comment.ommc.tasksPerTick");
+    public static final ConfigDouble QuitGameThreshold = ofDouble("ommc.quitGameThreshold", 2.0D, 0.0D, Double.MAX_VALUE, false, "config.comment.ommc.quitGameThreshold");
+    public static final ConfigInteger QuitGameSpeed = ofInteger("ommc.quitGameSpeed", 4, 2, 100, "config.comment.ommc.quitGameSpeed");
+    public static final ConfigInteger QuitGameCounter = ofInteger("ommc.quitGameCounter", 60, 1, 100, "config.comment.ommc.quitGameCounter");
 
 
     // press
-    public static final ConfigHotkey OpenWindow = ofHotkey("OpenWindow", KeyCodes.getStorageString(Keyboard.KEY_X, Keyboard.KEY_C), "打开本模组的配置");
-    public static final ConfigHotkey CopyTP = ofHotkey("CopyTP", KeyCodes.getStorageString(Keyboard.KEY_F3, Keyboard.KEY_C), "按下后复制到剪贴板");
-    public static final ConfigHotkey ToggleGameMode = ofHotkey("ToggleGameMode", KeyCodes.getStorageString(Keyboard.KEY_F3, Keyboard.KEY_F4), "在生存和创造之间切换");
-    public static final ConfigHotkey CopyItemID = ofHotkey("复制物品ID", KeybindMulti.fromStorageString(
+    public static final ConfigHotkey OpenWindow = ofHotkey("ommc.openWindow", KeyCodes.getStorageString(Keyboard.KEY_X, Keyboard.KEY_C), "config.comment.ommc.openWindow");
+    public static final ConfigHotkey CopyTP = ofHotkey("ommc.copyTp", KeyCodes.getStorageString(Keyboard.KEY_F3, Keyboard.KEY_C), "config.comment.ommc.copyTp");
+    public static final ConfigHotkey ToggleGameMode = ofHotkey("ommc.toggleGameMode", KeyCodes.getStorageString(Keyboard.KEY_F3, Keyboard.KEY_F4), "config.comment.ommc.toggleGameMode");
+    public static final ConfigHotkey CopyItemID = ofHotkey("ommc.copyItemId", KeybindMulti.fromStorageString(
             KeyCodes.getStorageString(Keyboard.KEY_LCONTROL, Keyboard.KEY_C),
             KeybindSettings.GUI
-    ), "仅在EMI有用");
+    ), "config.comment.ommc.copyItemId");
 
 
     // toggle
-    public static final ConfigToggle AutoForward = ofToggle("AutoForward");
-    public static final ConfigToggle AutoLeft = ofToggle("AutoLeft");
-    public static final ConfigToggle AutoBack = ofToggle("AutoBack");
-    public static final ConfigToggle AutoRight = ofToggle("AutoRight");
-    public static final ConfigToggle AutoJump = ofToggle("AutoJump");
-    public static final ConfigToggle AutoSneak = ofToggle("AutoSneak");
+    public static final ConfigToggle AutoForward = ofToggle("ommc.autoForward");
+    public static final ConfigToggle AutoLeft = ofToggle("ommc.autoLeft");
+    public static final ConfigToggle AutoBack = ofToggle("ommc.autoBack");
+    public static final ConfigToggle AutoRight = ofToggle("ommc.autoRight");
+    public static final ConfigToggle AutoJump = ofToggle("ommc.autoJump");
+    public static final ConfigToggle PermanentSneak = new ConfigToggle("ommc.autoSneak", "config.comment.ommc.autoSneak");
+    public static final ConfigToggle FakeSneaking = new ConfigToggle("ommc.fakeSneaking", "config.comment.ommc.fakeSneaking");
     public static final ConfigToggle HoldAttack = ofToggle("ommc.holdAttack");
     public static final ConfigToggle PeriodicAttack = ofToggle("ommc.periodicAttack");
     public static final ConfigToggle HoldUse = ofToggle("ommc.holdUse");
     public static final ConfigToggle PeriodicUse = ofToggle("ommc.periodicUse");
-    public static final ConfigToggle CullEntityRender = ofToggle("CullEntityRender");
-    public static final ConfigToggle FastFlying = ofToggle("FastFlying");
+    public static final ConfigToggle CullEntityRender = ofToggle("ommc.cullEntityRender");
+    public static final ConfigToggle FastFlying = ofToggle("ommc.fastFlying");
 
 
     // debug
-    public static final ConfigHotkey Test = ofHotkey("测试", Keyboard.KEY_Y, "仅供测试");
+    public static final ConfigHotkey Test = ofHotkey("ommc.test", Keyboard.KEY_Y, "config.comment.ommc.test");
     public static final ConfigBoolean InstantCrafting = ofBoolean("InstantCrafting");
 
 
@@ -105,7 +107,8 @@ public class MainConfig extends SimpleConfigs {
                 FPSUnlocked,
                 RotateFree,
                 RemoveGuiContainerCD,
-                CreativeOneHit
+                CreativeOneHit,
+                PermanentSneakAllowInGUIs
         );
 
         numerical = List.of(
@@ -133,7 +136,8 @@ public class MainConfig extends SimpleConfigs {
                 AutoBack,
                 AutoRight,
                 AutoJump,
-                AutoSneak,
+                PermanentSneak,
+                FakeSneaking,
                 HoldAttack,
                 PeriodicAttack,
                 HoldUse,

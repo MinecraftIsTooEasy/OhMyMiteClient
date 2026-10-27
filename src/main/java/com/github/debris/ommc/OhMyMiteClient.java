@@ -13,8 +13,8 @@ public class OhMyMiteClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ModResourceManager.addResourcePackDomain(MOD_ID);
         MainConfig.getInstance().load();
         InitializationHandler.getInstance().registerInitializationHandler(new InitListener());
-        ModResourceManager.addResourcePackDomain(MOD_ID);
     }
 }

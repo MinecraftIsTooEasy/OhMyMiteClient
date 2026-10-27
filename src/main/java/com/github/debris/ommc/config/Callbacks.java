@@ -1,11 +1,12 @@
 package com.github.debris.ommc.config;
 
 import com.github.debris.ommc.feat.MiscFeat;
-import fi.dy.masa.malilib.config.interfaces.IValueChangeCallback;
-import fi.dy.masa.malilib.config.options.ConfigHotkey;
-import fi.dy.masa.malilib.config.options.ConfigToggle;
 import fi.dy.masa.malilib.render.RenderUtils;
-import net.minecraft.*;
+import net.minecraft.Block;
+import net.minecraft.I18n;
+import net.minecraft.ItemStack;
+import net.minecraft.Minecraft;
+import net.minecraft.Packet5PlayerInventory;
 
 public class Callbacks {
 
@@ -14,9 +15,6 @@ public class Callbacks {
             Minecraft.getMinecraft().displayGuiScreen(MainConfig.getInstance().getConfigScreen(null));
             return true;
         });
-
-        MainConfig.HoldUse.setValueChangeCallback(new FeatureCallbackHold(client.gameSettings.keyBindUseItem));
-        MainConfig.HoldAttack.setValueChangeCallback(new FeatureCallbackHold(client.gameSettings.keyBindAttack));
 
         MainConfig.CopyTP.getKeybind().setCallback((keyAction, iKeybind) -> {
             MiscFeat.copyToClipboard("/tp " + client.thePlayer.posX + " " + client.thePlayer.posY + " " + client.thePlayer.posZ);
@@ -35,24 +33,5 @@ public class Callbacks {
             RenderUtils.setGuiIngameInfo("已发包");
             return true;
         });
-    }
-
-    private static class FeatureCallbackHold implements IValueChangeCallback<ConfigHotkey> {
-        KeyBinding keyBinding;
-
-        public FeatureCallbackHold(KeyBinding keyBinding) {
-            this.keyBinding = keyBinding;
-        }
-
-        @Override
-        public void onValueChanged(ConfigHotkey config) {
-            if (((ConfigToggle) config).isOn()) {
-                this.keyBinding.pressTime = Integer.MAX_VALUE;
-                this.keyBinding.pressed = true;
-            } else {
-                this.keyBinding.pressTime = 0;
-                this.keyBinding.pressed = false;
-            }
-        }
     }
 }

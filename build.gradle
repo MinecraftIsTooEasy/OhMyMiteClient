@@ -6,12 +6,22 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+def useLocalizedArchiveName = Locale.default.country.equalsIgnoreCase("CN")
+
 base {
-//    archivesName = project.archives_base_name
-    archivesName = "[MITE生电]ommc"
+    // Prefix local JAR names with an optional alias, for example: "[Alias]" + archives_base_name.
+    // Maven publishing keeps using the lowercase maven_id configured below.
+    archivesName = useLocalizedArchiveName
+            ? "[MITE生电]${project.archives_base_name}"
+            : project.archives_base_name
 }
 
 repositories {
+    // Add repositories to retrieve artifacts from in here.
+    // Only declare repositories required by this project because Loom provides
+    // the repositories needed for Minecraft and its libraries automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repository declarations.
     mavenLocal()
     maven {
         name = "Spongepowered"
@@ -28,56 +38,81 @@ configurations {
 }
 
 dependencies {
+    // Dependency versions are maintained in gradle.properties or alongside project-specific declarations below.
+    // Use implementation for required mods, compileOnly for optional integrations,
+    // and localRuntime for mods needed only in the development environment.
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
+    // This project uses loader_version for FishModLoader.
     fml "com.github.MinecraftIsTooEasy:FishModLoader:${project.loader_version}"
     implementation "com.github.MinecraftIsTooEasy:FishModLoader:${project.loader_version}"
 
-    // depends
+    // The most basic dependency library mod, with a status similar to Fabric API
     implementation "org.moddedmite:rusted-iron-core:1.5.7"
     implementation "com.github.MinecraftIsTooEasy:ManyLib:2.3.1"
 
-    // compile
+    // Optional mod integrations.
     compileOnly "com.github.MinecraftIsTooEasy:ModMenu:10.1.1"
     compileOnly "com.github.MinecraftIsTooEasy:EMI:1.1.27"
 
-    // testing
+    // Mods needed only in the development environment.
     localRuntime "com.github.MinecraftIsTooEasy:Gson:2.10.1"
     localRuntime "com.github.MinecraftIsTooEasy:FastUtil:8.5.12"
     localRuntime "com.github.MinecraftIsTooEasy:EMI:1.1.27"
-    localRuntime "org.moddedmite:modern-mite:3.7.7"
+    localRuntime "org.moddedmite:modern-mite:3.8.0"
+
+    // To add strong dependencies, use "implementation" like above
+    // To compile mod integrations(e.g. ModMenu), use "compileOnly"
+    // To add mods for running client, use "localRuntime"
 }
+
+def fmlResolvedFile = configurations.fml.singleFile
 
 loom {
     accessWidenerPath = file("src/main/resources/ommc.accesswidener")
     mergedMinecraftJar()
+    setFML(fmlResolvedFile)
+    dependencies.add("mappings", fmlMCPMappings())
     mods {
-        "${archives_base_name}" {
+        "ommc" {
             sourceSet sourceSets.main
+//            sourceSet sourceSets.client
+//            sourceSet sourceSets.server
+//            For modules in the 'src' directory, only the main source set is required by default.
         }
+    }
+    runs {
+        client {
+            String name = project.username
+            String width = project.screen_width
+            String height = project.screen_height
+            programArgs "--userProperties", "{}", "--username", name, "--session", "0", "--width", width, "--height", height
+        }
+//        server {
+//            programArgs "--", ""
+//        }
     }
 }
 
-def fmlResolvedFile = configurations.fml.files.iterator().next()
-loom.setFML(fmlResolvedFile)
-dependencies.add("mappings", loom.fmlMCPMappings())
-
 processResources {
-    inputs.property "version", project.version
+    inputs.properties(
+            version: project.version,
+            id: project.mod_id,
+            name: project.mod_name
+    )
 
     filesMatching("fml.mod.json") {
-        expand "version": project.version
+        expand(inputs.properties)
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 17
+    options.release = 17
 }
 
 java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
+    // Loom automatically attaches sourcesJar to remapSourcesJar and the build lifecycle when it is present.
+    // Remove this line only when source artifacts should not be generated.
     withSourcesJar()
 
     sourceCompatibility = JavaVersion.VERSION_17
@@ -88,20 +123,16 @@ jar {
     inputs.property "archivesName", project.base.archivesName
 
     from("LICENSE") {
-        rename { "${it}_${inputs.properties.archivesName}"}
+        rename { String fileName -> "${fileName}_${inputs.properties.archivesName}" }
     }
 }
 
-tasks.named('runClient', JavaExec).configure { exec ->
-    exec.setArgs(['--username', project.property('username'), '--session', '0', '--width', '854', '--height', '480'])
-}
-
-// configure the maven publication
+// Configure the Maven publication.
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifactId = "ommc"
-            from components.java
+        create("mavenJava", MavenPublication) {
+            artifactId = project.maven_id
+            from(components.java)
         }
     }
 
@@ -112,7 +143,7 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
 
-        // Default Maven Central.
+        // ModdedMITE release repository.
         maven {
             name = "ModdedMITE"
             url = uri("https://maven.limingzxc.top/repository/maven-releases/")

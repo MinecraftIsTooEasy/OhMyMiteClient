@@ -1,63 +1,65 @@
-config.name.OpenWindow=Open Config Menu
-config.comment.OpenWindow=Directly open this menu
+config.menu.name.OMMCMain=OMMC Settings
+config.menu.comment.OMMCMain=Gameplay tweaks
 
-config.name.AutoForward=Auto Forward
-config.name.AutoLeft=Auto Left
-config.name.AutoBack=Auto Back
-config.name.AutoRight=Auto Right
-config.name.AutoJump=Auto Jump
-config.name.AutoSneak=Auto Sneak
+config.name.ommc.disableScoreboard=Disable Scoreboard Rendering
+config.name.ommc.autoQuitGame=Quit on Low Health
+config.name.ommc.gammaOverride=Force Night Vision
+config.comment.ommc.gammaOverride=Requires the gamma_free mod
+config.name.ommc.devClient=Dev Client
+config.name.ommc.fpsUnlocked=Unlock FPS
+config.name.ommc.rotateFree=Free Camera Rotation
+config.comment.ommc.rotateFree=Allows free camera rotation while under a Slowness effect
+config.name.ommc.removeGuiContainerCooldown=Remove Container GUI Cooldown
+config.comment.ommc.removeGuiContainerCooldown=Removes the cooldown after leaving villager trading and horse inventory screens
+config.name.ommc.creativeOneHit=One-Hit Kills in Creative Mode
+config.name.ommc.periodicAttackInterval=Periodic Attack Interval
+config.comment.ommc.periodicAttackInterval=In ticks
+config.name.ommc.periodicUseInterval=Periodic Use Interval
+config.comment.ommc.periodicUseInterval=In ticks
+config.name.ommc.flySpeedLevel=Horizontal Flight Speed
+config.name.ommc.flySpeedVertical=Vertical Flight Speed
+config.name.ommc.overrideUseInterval=Override Use Interval
+config.comment.ommc.overrideUseInterval=In milliseconds
+config.name.ommc.tasksPerTick=Tasks per Tick
+config.comment.ommc.tasksPerTick=For this mod's task queue
+config.name.ommc.quitGameThreshold=Low-Health Quit Threshold
+config.comment.ommc.quitGameThreshold=Quit after taking damage if health falls below this threshold
+config.name.ommc.quitGameSpeed=Low-Health Quit Delay
+config.comment.ommc.quitGameSpeed=Ticks between simulating Escape and clicking the quit button. Avoid setting this too low in single-player, as it may corrupt the save.
+config.name.ommc.quitGameCounter=Low-Health Quit Grace Period
+config.comment.ommc.quitGameCounter=Duration in seconds during which the game will not automatically quit after you enter a world
+
+config.name.ommc.openWindow=Open Config Menu
+config.comment.ommc.openWindow=Directly open this menu
+config.name.ommc.copyTp=Copy TP Command
+config.comment.ommc.copyTp=Once pressed, copy tp command to clipboard
+config.name.ommc.toggleGameMode=Toggle Game Mode
+config.comment.ommc.toggleGameMode=Toggle between survival and creative
+config.name.ommc.copyItemId=Copy Item ID
+config.comment.ommc.copyItemId=Only useful with EMI
+
+config.name.ommc.autoForward=Auto Forward
+config.name.ommc.autoLeft=Auto Left
+config.name.ommc.autoBack=Auto Back
+config.name.ommc.autoRight=Auto Right
+config.name.ommc.autoJump=Auto Jump
+config.name.ommc.autoSneak=Permanent Sneak
+config.comment.ommc.autoSneak=Keeps the player sneaking, including normal sneak slowdown and synchronizing the sneaking state with the server.
+config.name.ommc.fakeSneaking=Fake Sneaking
+config.comment.ommc.fakeSneaking=Prevents walking off edges without slowing movement or changing the actual sneaking state.
+config.name.ommc.permanentSneakAllowInGuis=Allow Permanent Sneak in GUIs
+config.comment.ommc.permanentSneakAllowInGuis=If enabled, Permanent Sneak also remains active while GUIs are open.
 config.name.ommc.holdAttack=Hold Attack
 config.name.ommc.periodicAttack=Periodic Attack
 config.name.ommc.holdUse=Hold Use
 config.name.ommc.periodicUse=Periodic Use
-config.name.CullEntityRender=Cull Entity Render
-config.name.FastFlying=Fast Flying
-
-config.name.CopyTP=Copy TP Command
-config.comment.CopyTP=Once pressed, copy tp command to clipboard
-
-config.name.ToggleGameMode=Toggle Game Mode
-config.comment.ToggleGameMode=Toggle between survival and creative
-
-config.name.AutoCrafting=Auto Crafting
-config.name.ToolSwitch=Tool Switch
-config.name.WeaponSwitch=Weapon Switch
-
-config.name.ommc.periodicAttackInterval=Periodic Attack Interval
-config.comment.ommc.periodicAttackInterval=In ticks
-
-config.name.ommc.periodicUseInterval=Periodic Use Interval
-config.comment.ommc.periodicUseInterval=In ticks
-
-config.name.FlySpeedLevel=Fly Speed Level
-config.name.FlySpeedVertical=Fly Speed Vertical
-
-config.name.OverrideUseInterval=Override Use Interval
-config.comment.OverrideUseInterval=In milliseconds
-
-config.name.ommc.tool_switch_mode=Tool Switch Mode
-
-config.enum.ommc.tool_switch_mode.Order=Order
-config.enum.ommc.tool_switch_mode.Durability=Durability Remained
-config.enum.ommc.tool_switch_mode.Material=Material
-
-config.name.ommc.item_sorting_order=Item Sorting Order
-
-config.enum.ommc.item_sorting_order.CREATIVE_INVENTORY=Creative Inventory
-config.enum.ommc.item_sorting_order.ITEM_ID=Item Id
-config.enum.ommc.item_sorting_order.TRANSLATION_KEY=Translation Key
-config.enum.ommc.item_sorting_order.TRANSLATION_RESULT=Translation Result
-config.enum.ommc.item_sorting_order.PINYIN=Pinyin
+config.name.ommc.cullEntityRender=Cull Entity Render
+config.name.ommc.fastFlying=Fast Flying
 
 config.tab.ommc.toggles=Toggles
 config.tab.ommc.numerical=Numerical
 config.tab.ommc.press=Press
 config.tab.ommc.toggle=Toggle
-config.tab.ommc.inventory_tweaks=Inventory Tweaks
-
-config.value.comment.OhMyMiteClient=Some tweaks
-config.hotkey.comment.OhMyMiteClient=Some tweaks
 
 ommc.toggleGameMode.fail=Failed to toggle game mode: you are not in dev mode!
 ommc.CopyTP.success=Successfully copied tp command to clipboard
